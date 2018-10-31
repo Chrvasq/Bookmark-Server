@@ -41,6 +41,7 @@
 #
 # After writing each step, restart the server and run test.py to test it.
 
+import os
 import http.server
 import requests
 from urllib.parse import unquote, parse_qs
@@ -150,6 +151,7 @@ class Shortener(http.server.BaseHTTPRequestHandler):
                 f"Couldn't fetch URI {longuri}. Sorry!".encode())
 
 if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 8000)) #Use PORT is it's there.
     server_address = ('', 8000)
     httpd = http.server.HTTPServer(server_address, Shortener)
     httpd.serve_forever()
